@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "968293702236",
+    "project_id": "evoting-app-79654",
+    "storage_bucket": "evoting-app-79654.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968293702236:android:72f27d2ce6480104cde499",
+        "android_client_info": {
+          "package_name": "com.example.secure_evoting_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8h1p1mmsrbSaiNqZCcO1CVApbNNu7tiA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

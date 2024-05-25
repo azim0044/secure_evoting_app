@@ -1,0 +1,82 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:secure_evoting_app/feautures/auth/services/auth.dart';
+import 'package:secure_evoting_app/feautures/election/model/model.dart';
+import 'package:secure_evoting_app/shared/widget/build_title.dart';
+import 'package:secure_evoting_app/shared/widget/result_election_card.dart';
+
+class ElectionResultScreen extends StatelessWidget {
+  const ElectionResultScreen({super.key});
+  Stream<List<ElectionsModel>> getElectionStream() {
+    FirebaseFirestore _db = FirebaseFirestore.instance;
+
+    return _db
+        .collection('elections')
+        .where('completedVoterId', arrayContains: Auth().currentUser!.uid)
+        .where('status', isEqualTo: 'Complete')
+        .snapshots()
+        .map((querySnapshot) {
+      return querySnapshot.docs.map((doc) {
+        Map<String, dynamic> data = doc.data();
+        data['id'] = doc.id;
+        return ElectionsModel.fromJson(data);
+      }).toList();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            "Election Result",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.blueAccent,
+        ),
+        body: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                const SizedBox(height: 20),
+                buildTitle('Complete Election'),
+                StreamBuilder<List<ElectionsModel>>(
+                  stream: getElectionStream(),
+                  builder: (BuildContext context, AsyncSnapshot<List<ElectionsModel>> snapshot) {
+                    if (snapshot.hasError) {
+                      return const Text('Something went wrong');
+                    }
+
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const CircularProgressIndicator();
+                    }
+
+                    if (snapshot.data!.isEmpty) {
+                      return const Text('No complete election');
+                    }
+
+                    return ListView.builder(
+                      itemCount: snapshot.data!.length,
+                      physics: const ScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return ResultElectionCard(election: snapshot.data![index]);
+                      },
+                    );
+                  },
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
