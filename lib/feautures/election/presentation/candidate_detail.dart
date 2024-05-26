@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:secure_evoting_app/feautures/chat/presentation/chat.dart';
 import 'package:secure_evoting_app/feautures/election/model/model.dart';
 import 'package:secure_evoting_app/feautures/settings/presentation/face_recognition.dart';
 import 'package:secure_evoting_app/shared/widget/build_title.dart';
@@ -157,7 +158,10 @@ class _CandidateDetailScreenState extends State<CandidateDetailScreen> {
                         size: 30,
                       ),
                       onPressed: () {
-                        Navigator.pop(context);
+                        Get.to(() => ChatPage(
+                              candidateId: widget.candidate.id,
+                              candidateImage: widget.candidate.images[0],
+                            ), transition: Transition.downToUp);
                       },
                     ),
                   ),
