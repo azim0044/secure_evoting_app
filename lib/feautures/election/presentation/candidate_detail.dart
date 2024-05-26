@@ -89,6 +89,15 @@ class _CandidateDetailScreenState extends State<CandidateDetailScreen> {
         child: Column(
           children: [
             _buildImageSlider(context),
+            const SizedBox(height: 20),
+            Text(
+              widget.candidate.full_name,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
             buildTitle('Candidate Manifesto'),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -158,10 +167,12 @@ class _CandidateDetailScreenState extends State<CandidateDetailScreen> {
                         size: 30,
                       ),
                       onPressed: () {
-                        Get.to(() => ChatPage(
-                              candidateId: widget.candidate.id,
-                              candidateImage: widget.candidate.images[0],
-                            ), transition: Transition.downToUp);
+                        Get.to(
+                            () => ChatPage(
+                                  candidateId: widget.candidate.id,
+                                  candidateImage: widget.candidate.images[0],
+                                ),
+                            transition: Transition.downToUp);
                       },
                     ),
                   ),

@@ -25,11 +25,7 @@ class _ChatPageState extends State<ChatPage> {
         _messageController.text,
         widget.candidateId,
       );
-      await _chatService.filterMessage(
-        candidateId: widget.candidateId,
-        messageId: messageId,
-        message: _messageController.text,
-      );
+
       if (scrollController.hasClients) {
         scrollController.animateTo(
           0,
@@ -37,7 +33,14 @@ class _ChatPageState extends State<ChatPage> {
           curve: Curves.easeInOut,
         );
       }
+
+      String filterMessage = _messageController.text;
       _messageController.clear();
+      await _chatService.filterMessage(
+        candidateId: widget.candidateId,
+        messageId: messageId,
+        message: filterMessage,
+      );
     }
   }
 

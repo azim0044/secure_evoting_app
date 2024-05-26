@@ -24,8 +24,11 @@ class Bubble extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (chat.senderId != Auth().currentUser!.uid)
-          CircleAvatar(
-            backgroundImage: NetworkImage(chat.profilePhoto),
+          Padding(
+            padding: const EdgeInsets.only(left: 8),
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(chat.profilePhoto),
+            ),
           ),
         Container(
           margin: margin ?? EdgeInsets.zero,
