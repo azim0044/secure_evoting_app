@@ -9,8 +9,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
-  font_awesome_flutter: ^9.2.0
   json_annotation: ^4.8.1
   flutter_secure_storage: ^4.2.1
   hexcolor: ^3.0.1
@@ -26,16 +24,10 @@ dependencies:
   firebase_storage: ^11.6.9
   motion_tab_bar_v2: ^0.3.0
   cached_network_image: ^3.3.1
-  dropdown_button2: ^2.3.9
   intl: ^0.18.0
-  buttons_tabbar: ^1.3.9
   path: ^1.8.3
-  flutter_modal_dialog: ^0.0.4
-  text_area: ^0.0.3
   flutter_easyloading: ^3.0.5
   firebase_core: ^2.27.0
-  loading_progress: ^1.0.2
-  top_snackbar_flutter: ^3.1.0
   google_fonts: 5.1.0
   http: ^1.2.0
   bcrypt: ^1.1.3
@@ -43,16 +35,9 @@ dependencies:
   otp_text_field: ^1.1.3
   carousel_slider: ^4.2.1
   face_camera: ^0.1.0
-  fast_rsa: ^3.6.2
   path_provider: ^2.1.3
   file_picker: ^8.0.0+1
-  rsa_encrypt: ^2.0.0
-  asn1lib: ^1.5.3
-  pointycastle: ^3.9.1
   aes_crypt_null_safe: ^2.0.2
-  chatview: ^1.3.1
-  tuple: ^2.0.2
-  rxdart: ^0.27.7
   flutter_chat_bubble: ^2.0.2
 
 dev_dependencies:

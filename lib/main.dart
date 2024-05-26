@@ -27,7 +27,7 @@ class MainApp extends StatelessWidget {
       builder: EasyLoading.init(),
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: HexColor('#FAF9F6'),
+        scaffoldBackgroundColor: Colors.white,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(HexColor('#FB5D02')),
