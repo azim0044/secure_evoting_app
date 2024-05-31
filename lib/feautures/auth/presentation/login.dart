@@ -42,8 +42,12 @@ class LoginPageScreen extends StatelessWidget {
       if (response.statusCode == 200) {
         Map<String, dynamic> responseBody = jsonDecode(response.body);
         String message = responseBody['access_token'];
+        String secureKey = responseBody['secureKey'];
         FlutterSecureStorage storage = FlutterSecureStorage();
         await storage.write(key: 'token', value: message);
+        await storage.write(key: 'secureKey', value: secureKey);
+        await storage.write(
+            key: 'secureKeyTime', value: DateTime.now().toIso8601String());
         return response;
       } else {
         throw Exception(

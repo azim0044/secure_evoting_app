@@ -110,10 +110,12 @@ class _HomeWidgetState extends State<HomeWidget> {
         .get();
     print(querySnapshot1.docs.length);
     print(querySnapshot2.docs.length);
-    setState(() {
-      _pendingElection = querySnapshot1.docs.length;
-      _completedElection = querySnapshot2.docs.length;
-    });
+    if (mounted) {
+      setState(() {
+        _pendingElection = querySnapshot1.docs.length;
+        _completedElection = querySnapshot2.docs.length;
+      });
+    }
   }
 
   @override

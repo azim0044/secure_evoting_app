@@ -102,7 +102,6 @@ class ElectionDetailScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Text(
             election.details,
-            textAlign: TextAlign.center,
             style: TextStyle(
                 fontFamily: GoogleFonts.workSans().fontFamily,
                 fontSize: 14,

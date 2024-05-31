@@ -164,7 +164,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget _buildeMessageInput() {
     return Container(
       margin: EdgeInsets.all(15.0),
-      height: 61,
+      height: 40,
       child: Row(
         children: [
           Expanded(
@@ -185,7 +185,7 @@ class _ChatPageState extends State<ChatPage> {
                       controller: _messageController,
                       decoration: InputDecoration(
                           hintText: "Type Something...",
-                          hintStyle: TextStyle(color: Colors.black54),
+                          hintStyle: TextStyle(color: Colors.black38),
                           border: InputBorder.none),
                     ),
                   ),

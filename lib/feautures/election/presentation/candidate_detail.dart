@@ -84,102 +84,118 @@ class _CandidateDetailScreenState extends State<CandidateDetailScreen> {
         ),
         centerTitle: true,
         backgroundColor: Colors.blueAccent,
+        actions: widget.fromWidget == 'In Progress'
+            ? <Widget>[
+                IconButton(
+                  icon: const Icon(
+                    Icons.chat,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  onPressed: () {
+                    Get.to(
+                        () => ChatPage(
+                              candidateId: widget.candidate.id,
+                              candidateImage: widget.candidate.images[0],
+                            ),
+                        transition: Transition.downToUp);
+                  },
+                ),
+              ]
+            : null,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             _buildImageSlider(context),
-            const SizedBox(height: 20),
-            Text(
-              widget.candidate.full_name,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-            buildTitle('Candidate Manifesto'),
+            const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Text(
-                widget.candidate.manifesto,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontFamily: GoogleFonts.workSans().fontFamily,
-                    fontSize: 14,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-            const SizedBox(height: 50),
-            if (widget.fromWidget == 'In Progress')
-              Container(
-                width: 200,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Get.to(
-                        () => FaceAuthenticationWidgetScreen(
-                              fromWidget: 'Vote',
-                              electionId: widget.electionId,
-                              candidateId: widget.candidate.id,
-                              candidateName: widget.candidate.full_name,
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 20),
+                    Text(
+                      widget.candidate.full_name,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    buildTitle('Candidate Manifesto'),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Text(
+                        widget.candidate.manifesto,
+                        style: TextStyle(
+                            fontFamily: GoogleFonts.workSans().fontFamily,
+                            fontSize: 14,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    if (widget.fromWidget == 'In Progress')
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 200,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Get.to(
+                                    () => FaceAuthenticationWidgetScreen(
+                                          fromWidget: 'Vote',
+                                          electionId: widget.electionId,
+                                          candidateId: widget.candidate.id,
+                                          candidateName:
+                                              widget.candidate.full_name,
+                                        ),
+                                    transition: Transition.rightToLeft);
+                              },
+                              child: const Padding(
+                                padding: EdgeInsets.all(15),
+                                child: Text(
+                                  'Vote Now !',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'OpenSans',
+                                      color: Colors.white),
+                                ),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blueAccent,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                elevation: 5.0,
+                              ),
                             ),
-                        transition: Transition.rightToLeft);
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.all(15),
-                    child: Text(
-                      'Vote Now !',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'OpenSans',
-                          color: Colors.white),
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blueAccent,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    elevation: 5.0,
-                  ),
+                          ),
+                        ],
+                      ),
+                    const SizedBox(height: 20),
+                  ],
                 ),
               ),
+            ),
           ],
         ),
       ),
-      bottomNavigationBar: widget.fromWidget == 'In Progress'
-          ? Container(
-              height: 90.0,
-              child: Align(
-                alignment: Alignment.topRight,
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.green, // Set the color of the circle
-                      shape: BoxShape.circle,
-                    ),
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.chat,
-                        color: Colors.white,
-                        size: 30,
-                      ),
-                      onPressed: () {
-                        Get.to(
-                            () => ChatPage(
-                                  candidateId: widget.candidate.id,
-                                  candidateImage: widget.candidate.images[0],
-                                ),
-                            transition: Transition.downToUp);
-                      },
-                    ),
-                  ),
-                ),
-              ),
-            )
-          : null,
     );
   }
 

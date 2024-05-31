@@ -63,7 +63,17 @@ class _FaceAuthenticationWidgetScreenState
       if (widget.fromWidget == 'Upload Reference') {
         response = await _networkUploadReference(encryptedFilePath);
       } else {
-        response = await _networkFaceAuthentication(encryptedFilePath);
+        final electionData = {
+          'userId': Auth().currentUser!.uid,
+          'electionId': widget.electionId!,
+          'candidateId': widget.candidateId!,
+        };
+
+        String encryptedDataPath =
+            await EncryptData.encrypt_data(electionData, secureKey);
+
+        response = await _networkFaceAuthentication(
+            encryptedFilePath, encryptedDataPath);
       }
       if (encryptedFilePath != null && response.statusCode == 200) {
         return true;
@@ -104,7 +114,7 @@ class _FaceAuthenticationWidgetScreenState
   }
 
   Future<http.Response> _networkFaceAuthentication(
-      String encryptedImagePath) async {
+      String encryptedImagePath, String encryptedDataPath) async {
     String url = ApiEndPoints().faceRecognition;
     String? token = await storage.read(key: 'token');
 
@@ -112,12 +122,10 @@ class _FaceAuthenticationWidgetScreenState
     request.headers.addAll({
       'Authorization': 'Bearer $token',
     });
-    request.fields['userId'] = Auth().currentUser!.uid;
-    request.fields['electionId'] = widget.electionId!;
-    request.fields['candidateId'] = widget.candidateId!;
     request.files
         .add(await http.MultipartFile.fromPath('image', encryptedImagePath));
-
+    request.files
+        .add(await http.MultipartFile.fromPath('data', encryptedDataPath));
     var response = await request.send();
 
     if (response.statusCode == 200) {

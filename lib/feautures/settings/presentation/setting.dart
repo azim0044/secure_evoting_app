@@ -11,6 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:secure_evoting_app/feautures/auth/presentation/login.dart';
 import 'package:secure_evoting_app/feautures/auth/services/auth.dart';
 import 'package:secure_evoting_app/feautures/settings/presentation/face_recognition.dart';
+import 'package:secure_evoting_app/feautures/settings/presentation/services.dart';
 import 'package:secure_evoting_app/feautures/settings/presentation/update-profile.dart';
 import 'package:secure_evoting_app/shared/const/api_endpoints.dart';
 import 'package:secure_evoting_app/shared/widget/easy_loading_custom.dart';
@@ -56,8 +57,6 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
       await storage.write(key: 'secureKey', value: responseBody['secureKey']);
       await storage.write(
           key: 'secureKeyTime', value: DateTime.now().toIso8601String());
-      print(responseBody['secureKey']);
-      print(DateTime.now().toIso8601String());
       return response;
     } else {
       throw Exception(
@@ -105,13 +104,14 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
                               .withOpacity(1),
                           child: Container(
                             width: double.infinity,
+                            color: Colors.white,
                             child: Column(
                               children: [
                                 _CustomListTile1(
                                     title: "Update Password",
                                     icon: Icons.person,
                                     trailing:
-                                        Icon(CupertinoIcons.forward, size: 18),
+                                        Icon(Icons.arrow_forward_ios, size: 18),
                                     onTap: () {
                                       Get.to(() => UpdateProfileWidget(),
                                           transition: Transition.rightToLeft);
@@ -134,13 +134,13 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
                               .withOpacity(1),
                           child: Container(
                             width: double.infinity,
+                            color: Colors.white,
                             child: Column(
                               children: [
                                 _CustomListTile1(
                                     title: "Generate Secure Key",
                                     icon: Icons.key,
-                                    trailing: Icon(CupertinoIcons.refresh_thick,
-                                        size: 18),
+                                    trailing: Icon(Icons.refresh, size: 18),
                                     onTap: () {
                                       _generateKeyPair();
                                     }),
@@ -154,7 +154,7 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
                                     title: "Upload Reference Image",
                                     icon: Icons.person,
                                     trailing:
-                                        Icon(CupertinoIcons.forward, size: 18),
+                                        Icon(Icons.arrow_forward_ios, size: 18),
                                     onTap: () {
                                       Get.to(
                                           () => FaceAuthenticationWidgetScreen(

@@ -49,6 +49,12 @@ class Bubble extends StatelessWidget {
                     chat.message,
                     style: TextStyle(color: textColorOnType),
                   ),
+                  if (isRead)
+                    const Icon(
+                      Icons.warning,
+                      size: 16,
+                      color: Colors.black38,
+                    ),
                   const SizedBox(
                     height: 8,
                   ),
@@ -65,7 +71,26 @@ class Bubble extends StatelessWidget {
     );
   }
 
+  bool get isRead {
+    String cleanMessage =
+        chat.message.replaceAll(RegExp(r'\W'), '').toLowerCase();
+    String keyword = 'thismessageisfilteredoutbecauseitcontains'.toLowerCase();
+
+    if (cleanMessage.contains(keyword)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   Color get textColorOnType {
+    String cleanMessage =
+        chat.message.replaceAll(RegExp(r'\W'), '').toLowerCase();
+    String keyword = 'thismessageisfilteredoutbecauseitcontains'.toLowerCase();
+
+    if (cleanMessage.contains(keyword)) {
+      return Colors.white;
+    }
     if (chat.senderId == Auth().currentUser!.uid) {
       return Colors.white;
     } else {
@@ -74,13 +99,13 @@ class Bubble extends StatelessWidget {
   }
 
   Color get bgColorOnType {
-    print(chat.message);
     String cleanMessage =
         chat.message.replaceAll(RegExp(r'\W'), '').toLowerCase();
     String keyword = 'thismessageisfilteredoutbecauseitcontains'.toLowerCase();
 
     if (cleanMessage.contains(keyword)) {
-      return Color.fromARGB(255, 201, 77, 77); // color for messages containing the keyword
+      return Color.fromARGB(
+          255, 201, 77, 77); // color for messages containing the keyword
     }
     if (chat.senderId == Auth().currentUser!.uid) {
       return const Color(0xFF007AFF); // color for sent messages

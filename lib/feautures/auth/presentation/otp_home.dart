@@ -22,6 +22,7 @@ class QrCodeHome extends StatefulWidget {
 
 class _QrCodeHomeState extends State<QrCodeHome> {
   OtpFieldController otpController = OtpFieldController();
+  
 
   @override
   void initState() {

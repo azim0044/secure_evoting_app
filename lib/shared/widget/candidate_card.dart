@@ -21,20 +21,27 @@ class CandidateCard extends StatelessWidget {
       onTap: () {
         Get.to(
             () => CandidateDetailScreen(
-                candidate: candidate, electionId: electionId,
+                candidate: candidate,
+                electionId: electionId,
                 fromWidget: 'In Progress'),
             transition: Transition.rightToLeftWithFade);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        child: Card(
-          elevation: 4,
-          surfaceTintColor: Colors.transparent,
-          shape: RoundedRectangleBorder(
+        child: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.white,
             borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: Offset(0, 2),
+              ),
+            ],
           ),
-          color: Colors.white,
-          clipBehavior: Clip.antiAliasWithSaveLayer,
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Row(

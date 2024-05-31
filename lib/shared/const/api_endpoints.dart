@@ -13,4 +13,5 @@ class ApiEndPoints {
   final String uploadPrivateKey = "${BaseUrl.BASE_URL}upload-private-key";
   final String faceRecognition = "${BaseUrl.BASE_URL}face-recognition";
   final String filterMessage = "${BaseUrl.BASE_URL}filter-message";
+  final String test = "${BaseUrl.BASE_URL}test";
 }
