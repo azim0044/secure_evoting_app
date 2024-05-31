@@ -179,6 +179,9 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
                                     SharedPreferences prefs =
                                         await SharedPreferences.getInstance();
                                     prefs.clear();
+                                    FlutterSecureStorage storage =
+                                        FlutterSecureStorage();
+                                    await storage.deleteAll();
                                     EasyLoading.dismiss();
                                     Get.offAll(() => LoginPageScreen());
                                   },
