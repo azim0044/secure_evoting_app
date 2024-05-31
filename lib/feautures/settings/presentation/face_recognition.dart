@@ -86,7 +86,7 @@ class _FaceAuthenticationWidgetScreenState
       }
     } catch (e) {
       print(e.toString());
-      throw Exception('Failed to upload reference!');
+      throw Exception('Face authentication failed!');
     }
   }
 
