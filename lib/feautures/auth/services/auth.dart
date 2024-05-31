@@ -43,16 +43,21 @@ class Auth {
     await _auth.signOut();
   }
 
-  Future<bool> writeUserDetail({required fullName, required email, required photoUrl, required password}) async {
+  Future<bool> writeUserDetail(
+      {required fullName,
+      required email,
+      required photoUrl,
+      required password}) async {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     try {
-      print(password);
       await users.doc(_auth.currentUser!.uid).set(
         {
           'full_name': fullName,
           'email': email,
           'photo_url': photoUrl,
           'password': password,
+          'userReference': false,
+          'aes_key': '',
         },
       );
       return true;
